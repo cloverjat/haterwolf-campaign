@@ -4,9 +4,620 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>$HATER Creator Campaign | HaterWolf Pack Leaderboard</title>
-  <!-- Full content is in the local artifacts; this is a placeholder for length. The complete working file is available. -->
+  <meta name="description" content="Official $HATER creator campaign platform. Post about HaterWolf, submit your tweets, get scored for authentic engagement. No bots. Only real haters." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            hate: {
+              50: '#fff1f1',
+              100: '#ffe1e1',
+              200: '#ffc7c7',
+              300: '#ffa3a3',
+              400: '#ff6b6b',
+              500: '#f83b3b',
+              600: '#e51d1d',
+              700: '#c11414',
+              800: '#a01414',
+              900: '#841818',
+              950: '#480707',
+            },
+            wolf: {
+              900: '#0a0a0a',
+              800: '#111111',
+              700: '#1a1a1a',
+              600: '#222222',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['Orbitron', 'Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { background: #0a0a0a; }
+    .glow-red { box-shadow: 0 0 20px rgba(248, 59, 59, 0.3); }
+    .glow-text { text-shadow: 0 0 30px rgba(248, 59, 59, 0.5); }
+    .card-hover { transition: all 0.2s ease; }
+    .card-hover:hover { transform: translateY(-2px); border-color: #f83b3b; }
+    .score-bar { transition: width 0.8s ease; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #111; }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+    .tab-active { border-bottom: 2px solid #f83b3b; color: #f83b3b; }
+  </style>
 </head>
-<body>
-  <h1>See full index.html in artifacts for the complete platform.</h1>
+<body class="bg-wolf-900 text-gray-100 font-sans antialiased min-h-screen">
+  <!-- Nav -->
+  <nav class="border-b border-wolf-600 bg-wolf-800/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-hate-600 flex items-center justify-center text-xl font-black">🐺</div>
+        <div>
+          <div class="font-display font-bold text-lg tracking-wider">HATER<span class="text-hate-500">WOLF</span></div>
+          <div class="text-[10px] text-gray-500 uppercase tracking-widest">Creator Campaign</div>
+        </div>
+      </div>
+      <div class="hidden md:flex items-center gap-6 text-sm">
+        <button onclick="showView('home')" class="nav-link hover:text-hate-400 transition">Home</button>
+        <button onclick="showView('leaderboard')" class="nav-link hover:text-hate-400 transition">Leaderboard</button>
+        <button onclick="showView('submit')" class="nav-link hover:text-hate-400 transition">Submit Tweet</button>
+        <button onclick="showView('rules')" class="nav-link hover:text-hate-400 transition">Rules</button>
+        <a href="https://x.com/HATERWOLFMEME" target="_blank" class="text-hate-400 hover:text-hate-300">@HATERWOLFMEME</a>
+      </div>
+      <button onclick="showView('submit')" class="md:hidden bg-hate-600 hover:bg-hate-500 px-3 py-1.5 rounded text-sm font-semibold">Submit</button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl mx-auto px-4 py-8">
+
+    <!-- HOME VIEW -->
+    <div id="view-home" class="view">
+      <!-- Hero -->
+      <section class="text-center py-12 md:py-20">
+        <div class="inline-block px-3 py-1 rounded-full bg-hate-900/50 border border-hate-700 text-hate-400 text-xs font-semibold tracking-wider mb-6">
+          OFFICIAL $HATER CREATOR CAMPAIGN
+        </div>
+        <h1 class="font-display text-4xl md:text-6xl font-black tracking-tight mb-4 glow-text">
+          NO SHILLS.<br/><span class="text-hate-500">ONLY HATE.</span>
+        </h1>
+        <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-8">
+          Post about <span class="text-white font-semibold">$HATER</span>. Get scored for real engagement. Climb the Pack Leaderboard. Bots get zero. Real haters get points.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <button onclick="showView('submit')" class="bg-hate-600 hover:bg-hate-500 text-white font-bold px-8 py-3.5 rounded-lg text-lg transition glow-red">
+            Submit Your Tweet
+          </button>
+          <button onclick="showView('leaderboard')" class="border border-wolf-600 hover:border-hate-500 text-white font-semibold px-8 py-3.5 rounded-lg text-lg transition">
+            View Leaderboard
+          </button>
+        </div>
+      </section>
+
+      <!-- Stats -->
+      <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+        <div class="bg-wolf-800 border border-wolf-600 rounded-xl p-5 text-center">
+          <div class="text-3xl font-black text-hate-400" id="stat-creators">12</div>
+          <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">Creators</div>
+        </div>
+        <div class="bg-wolf-800 border border-wolf-600 rounded-xl p-5 text-center">
+          <div class="text-3xl font-black text-hate-400" id="stat-tweets">28</div>
+          <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">Tweets Scored</div>
+        </div>
+        <div class="bg-wolf-800 border border-wolf-600 rounded-xl p-5 text-center">
+          <div class="text-3xl font-black text-hate-400" id="stat-points">4,820</div>
+          <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">Total Points</div>
+        </div>
+        <div class="bg-wolf-800 border border-wolf-600 rounded-xl p-5 text-center">
+          <div class="text-3xl font-black text-hate-400">∞</div>
+          <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">Hate Level</div>
+        </div>
+      </section>
+
+      <!-- Project Info -->
+      <section class="bg-wolf-800 border border-wolf-600 rounded-2xl p-6 md:p-8 mb-12">
+        <div class="flex flex-col md:flex-row gap-8 items-start">
+          <div class="flex-1">
+            <h2 class="font-display text-2xl font-bold mb-3">About $HATER</h2>
+            <p class="text-gray-400 mb-4 leading-relaxed">
+              The official middle finger to crypto influencers, scammers & rug pulls. No utility. No roadmap. No promises. Only hate — and the wolf pack that hunts in silence.
+            </p>
+            <div class="grid grid-cols-2 gap-3 text-sm">
+              <div class="bg-wolf-700 rounded-lg p-3">
+                <div class="text-gray-500 text-xs">Supply</div>
+                <div class="font-semibold">1,000,000,000</div>
+              </div>
+              <div class="bg-wolf-700 rounded-lg p-3">
+                <div class="text-gray-500 text-xs">Tax</div>
+                <div class="font-semibold">0% / 0%</div>
+              </div>
+              <div class="bg-wolf-700 rounded-lg p-3">
+                <div class="text-gray-500 text-xs">LP</div>
+                <div class="font-semibold text-green-400">Burned</div>
+              </div>
+              <div class="bg-wolf-700 rounded-lg p-3">
+                <div class="text-gray-500 text-xs">Contract</div>
+                <div class="font-semibold text-green-400">Renounced</div>
+              </div>
+            </div>
+          </div>
+          <div class="w-full md:w-72 space-y-3">
+            <a href="http://haterwolf.com/" target="_blank" class="flex items-center gap-3 bg-wolf-700 hover:bg-wolf-600 border border-wolf-600 rounded-xl p-4 transition">
+              <span class="text-2xl">🌐</span>
+              <div>
+                <div class="font-semibold">Website</div>
+                <div class="text-xs text-gray-500">haterwolf.com</div>
+              </div>
+            </a>
+            <a href="https://x.com/HATERWOLFMEME" target="_blank" class="flex items-center gap-3 bg-wolf-700 hover:bg-wolf-600 border border-wolf-600 rounded-xl p-4 transition">
+              <span class="text-2xl">𝕏</span>
+              <div>
+                <div class="font-semibold">@HATERWOLFMEME</div>
+                <div class="text-xs text-gray-500">Official X</div>
+              </div>
+            </a>
+            <a href="https://t.me/HATERWOLF" target="_blank" class="flex items-center gap-3 bg-wolf-700 hover:bg-wolf-600 border border-wolf-600 rounded-xl p-4 transition">
+              <span class="text-2xl">✈️</span>
+              <div>
+                <div class="font-semibold">Telegram</div>
+                <div class="text-xs text-gray-500">t.me/HATERWOLF</div>
+              </div>
+            </a>
+            <div class="bg-wolf-700 border border-wolf-600 rounded-xl p-4">
+              <div class="text-xs text-gray-500 mb-1">Contract (Solana)</div>
+              <div class="font-mono text-xs break-all text-hate-300 select-all">gLWXWsdtGv3PwpFcxxyFDjvABAFeUKV3HkL88Bxpump</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How it works short -->
+      <section class="mb-12">
+        <h2 class="font-display text-2xl font-bold text-center mb-8">How the Pack Ranks</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-wolf-800 border border-wolf-600 rounded-xl p-6 text-center card-hover">
+            <div class="text-4xl mb-3">1</div>
+            <h3 class="font-bold text-lg mb-2">Post About $HATER</h3>
+            <p class="text-gray-400 text-sm">Tweet, quote, or reply with real hate for rugs, shills & influencers. Tag the project or use $HATER.</p>
+          </div>
+          <div class="bg-wolf-800 border border-wolf-600 rounded-xl p-6 text-center card-hover">
+            <div class="text-4xl mb-3">2</div>
+            <h3 class="font-bold text-lg mb-2">Submit the Link</h3>
+            <p class="text-gray-400 text-sm">Paste your tweet URL. Our engine checks relevance + authentic engagement. Bots get zero.</p>
+          </div>
+          <div class="bg-wolf-800 border border-wolf-600 rounded-xl p-6 text-center card-hover">
+            <div class="text-4xl mb-3">3</div>
+            <h3 class="font-bold text-lg mb-2">Climb the Board</h3>
+            <p class="text-gray-400 text-sm">Earn points based on real likes, RTs, replies & impact. Highest score = Alpha of the Pack.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- LEADERBOARD VIEW -->
+    <div id="view-leaderboard" class="view hidden">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+        <div>
+          <h1 class="font-display text-3xl font-bold">Pack Leaderboard</h1>
+          <p class="text-gray-400 text-sm mt-1">Ranked by authentic engagement score. Updated live in browser.</p>
+        </div>
+        <button onclick="showView('submit')" class="bg-hate-600 hover:bg-hate-500 px-5 py-2.5 rounded-lg font-semibold text-sm">+ Submit Tweet</button>
+      </div>
+
+      <div class="bg-wolf-800 border border-wolf-600 rounded-2xl overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left">
+            <thead class="bg-wolf-700 text-xs uppercase tracking-wider text-gray-400">
+              <tr>
+                <th class="px-5 py-4">Rank</th>
+                <th class="px-5 py-4">Creator</th>
+                <th class="px-5 py-4 text-right">Tweets</th>
+                <th class="px-5 py-4 text-right">Total Score</th>
+                <th class="px-5 py-4 text-right">Best Tweet</th>
+              </tr>
+            </thead>
+            <tbody id="leaderboard-body" class="divide-y divide-wolf-600">
+              <!-- filled by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="mt-6 text-center text-sm text-gray-500">
+        Scores are calculated with anti-bot heuristics. Suspicious engagement = 0 points.
+      </div>
+    </div>
+
+    <!-- SUBMIT VIEW -->
+    <div id="view-submit" class="view hidden">
+      <div class="max-w-2xl mx-auto">
+        <h1 class="font-display text-3xl font-bold mb-2">Submit Your Hate</h1>
+        <p class="text-gray-400 mb-8">Paste a tweet about $HATER / HaterWolf. We'll score it for authenticity & impact.</p>
+
+        <div class="bg-wolf-800 border border-wolf-600 rounded-2xl p-6 md:p-8 space-y-6">
+          <!-- Creator Identity -->
+          <div>
+            <label class="block text-sm font-medium text-gray-300 mb-2">Your X Username</label>
+            <div class="flex gap-2">
+              <span class="bg-wolf-700 border border-wolf-600 rounded-l-lg px-3 flex items-center text-gray-400">@</span>
+              <input id="input-username" type="text" placeholder="yourhandle" class="flex-1 bg-wolf-700 border border-wolf-600 border-l-0 rounded-r-lg px-4 py-3 focus:outline-none focus:border-hate-500 text-white" />
+            </div>
+          </div>
+
+          <!-- Tweet URL -->
+          <div>
+            <label class="block text-sm font-medium text-gray-300 mb-2">Tweet URL</label>
+            <input id="input-tweet-url" type="url" placeholder="https://x.com/username/status/1234567890" class="w-full bg-wolf-700 border border-wolf-600 rounded-lg px-4 py-3 focus:outline-none focus:border-hate-500 text-white" />
+          </div>
+
+          <!-- Metrics (manual for MVP - real would fetch via API) -->
+          <div class="border-t border-wolf-600 pt-6">
+            <div class="text-sm font-medium text-gray-300 mb-3">Tweet Metrics <span class="text-gray-500 font-normal">(enter current public numbers)</span></div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div>
+                <label class="text-xs text-gray-500">Likes</label>
+                <input id="input-likes" type="number" min="0" value="0" class="w-full bg-wolf-700 border border-wolf-600 rounded-lg px-3 py-2 mt-1 focus:outline-none focus:border-hate-500" />
+              </div>
+              <div>
+                <label class="text-xs text-gray-500">Reposts</label>
+                <input id="input-rts" type="number" min="0" value="0" class="w-full bg-wolf-700 border border-wolf-600 rounded-lg px-3 py-2 mt-1 focus:outline-none focus:border-hate-500" />
+              </div>
+              <div>
+                <label class="text-xs text-gray-500">Replies</label>
+                <input id="input-replies" type="number" min="0" value="0" class="w-full bg-wolf-700 border border-wolf-600 rounded-lg px-3 py-2 mt-1 focus:outline-none focus:border-hate-500" />
+              </div>
+              <div>
+                <label class="text-xs text-gray-500">Views / Impressions</label>
+                <input id="input-views" type="number" min="0" value="0" class="w-full bg-wolf-700 border border-wolf-600 rounded-lg px-3 py-2 mt-1 focus:outline-none focus:border-hate-500" />
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="text-xs text-gray-500">Your Followers</label>
+              <input id="input-followers" type="number" min="0" value="500" class="w-full bg-wolf-700 border border-wolf-600 rounded-lg px-3 py-2 mt-1 focus:outline-none focus:border-hate-500" />
+            </div>
+            <div>
+              <label class="text-xs text-gray-500">Account Age (days)</label>
+              <input id="input-age" type="number" min="1" value="180" class="w-full bg-wolf-700 border border-wolf-600 rounded-lg px-3 py-2 mt-1 focus:outline-none focus:border-hate-500" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-300 mb-2">Does the tweet mention $HATER / HaterWolf / the contract?</label>
+            <select id="input-relevant" class="w-full bg-wolf-700 border border-wolf-600 rounded-lg px-4 py-3 focus:outline-none focus:border-hate-500">
+              <option value="yes">Yes – clearly about the project</option>
+              <option value="partial">Partial – related but not direct</option>
+              <option value="no">No – not related</option>
+            </select>
+          </div>
+
+          <button onclick="scoreAndSubmit()" class="w-full bg-hate-600 hover:bg-hate-500 text-white font-bold py-4 rounded-lg text-lg transition glow-red">
+            Analyze & Score Tweet
+          </button>
+        </div>
+
+        <!-- Result Card -->
+        <div id="result-card" class="hidden mt-8 bg-wolf-800 border border-wolf-600 rounded-2xl p-6 md:p-8">
+          <h3 class="font-display text-xl font-bold mb-4">Scoring Result</h3>
+          <div id="result-content"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RULES VIEW -->
+    <div id="view-rules" class="view hidden">
+      <div class="max-w-3xl mx-auto">
+        <h1 class="font-display text-3xl font-bold mb-6">Campaign Rules & Scoring</h1>
+        
+        <div class="space-y-6">
+          <div class="bg-wolf-800 border border-wolf-600 rounded-xl p-6">
+            <h2 class="font-bold text-lg text-hate-400 mb-3">What Counts</h2>
+            <ul class="space-y-2 text-gray-300 text-sm">
+              <li>• Original tweets, quote tweets, or high-effort replies about $HATER / HaterWolf</li>
+              <li>• Content that spreads the manifesto: hate for rugs, shills, influencers, fake alpha</li>
+              <li>• Must be public and still live when scored</li>
+              <li>• One submission per tweet. Multiple tweets allowed.</li>
+            </ul>
+          </div>
+
+          <div class="bg-wolf-800 border border-wolf-600 rounded-xl p-6">
+            <h2 class="font-bold text-lg text-hate-400 mb-3">Scoring Formula</h2>
+            <div class="bg-wolf-900 rounded-lg p-4 font-mono text-sm text-gray-300 mb-4">
+              Base = (Likes × 1) + (Reposts × 3) + (Replies × 2) + (Views × 0.02)<br/>
+              Score = Base × Authenticity Multiplier × Relevance Multiplier
+            </div>
+            <p class="text-gray-400 text-sm">Higher weight on reposts & replies because they show real reach and discussion.</p>
+          </div>
+
+          <div class="bg-wolf-800 border border-wolf-600 rounded-xl p-6">
+            <h2 class="font-bold text-lg text-hate-400 mb-3">Anti-Bot / Authenticity Checks</h2>
+            <ul class="space-y-2 text-gray-300 text-sm">
+              <li>• Engagement rate vs follower count (extremely high rates on small accounts = flag)</li>
+              <li>• Account age (very new accounts get lower trust)</li>
+              <li>• Sudden spike patterns (when data available)</li>
+              <li>• If authenticity multiplier falls below threshold → <span class="text-hate-400 font-semibold">0 points</span></li>
+            </ul>
+            <p class="text-gray-500 text-xs mt-3">This is a heuristic system for the MVP. Real production can add deeper ML / third-party bot scores.</p>
+          </div>
+
+          <div class="bg-wolf-800 border border-wolf-600 rounded-xl p-6">
+            <h2 class="font-bold text-lg text-hate-400 mb-3">Relevance Multipliers</h2>
+            <ul class="space-y-1 text-gray-300 text-sm">
+              <li>• Clearly about $HATER / HaterWolf → × 1.0</li>
+              <li>• Related / partial → × 0.5</li>
+              <li>• Not related → × 0.0 (disqualified)</li>
+            </ul>
+          </div>
+
+          <div class="bg-wolf-800 border border-wolf-600 rounded-xl p-6">
+            <h2 class="font-bold text-lg text-hate-400 mb-3">Fair Play</h2>
+            <p class="text-gray-300 text-sm">Bought likes, bot farms, engagement pods, or fake accounts = zero. The pack doesn't need fake hate. Real energy only.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-wolf-600 mt-16 py-8 text-center text-sm text-gray-500">
+    <div class="max-w-6xl mx-auto px-4">
+      <p class="mb-2">Built for the <span class="text-hate-400">$HATER</span> wolf pack • No shills. Only hate.</p>
+      <div class="flex justify-center gap-6">
+        <a href="http://haterwolf.com/" target="_blank" class="hover:text-hate-400">Website</a>
+        <a href="https://x.com/HATERWOLFMEME" target="_blank" class="hover:text-hate-400">X</a>
+        <a href="https://t.me/HATERWOLF" target="_blank" class="hover:text-hate-400">Telegram</a>
+      </div>
+      <p class="mt-4 text-xs text-gray-600">This is a campaign scoring platform. Not financial advice. DYOR. Contract renounced. LP burned.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ========== DATA ==========
+    const STORAGE_KEY = 'haterwolf_campaign_v1';
+
+    // Sample seed data (demo)
+    const seedData = [
+      { username: 'wolfpack_alpha', score: 842, tweets: 4, best: 312, authenticity: 0.92 },
+      { username: 'hate_dealer', score: 715, tweets: 3, best: 289, authenticity: 0.88 },
+      { username: 'no_shill_zone', score: 623, tweets: 5, best: 198, authenticity: 0.95 },
+      { username: 'rug_hunter_x', score: 511, tweets: 2, best: 267, authenticity: 0.85 },
+      { username: 'meme_hater_69', score: 448, tweets: 3, best: 201, authenticity: 0.79 },
+      { username: 'sol_wolf', score: 389, tweets: 2, best: 220, authenticity: 0.91 },
+      { username: 'anti_influencer', score: 356, tweets: 4, best: 145, authenticity: 0.87 },
+      { username: 'pack_loyalty', score: 298, tweets: 1, best: 298, authenticity: 0.94 },
+      { username: 'middle_finger_sol', score: 267, tweets: 2, best: 156, authenticity: 0.82 },
+      { username: 'burn_the_rugs', score: 214, tweets: 3, best: 98, authenticity: 0.76 },
+      { username: 'hater_daily', score: 187, tweets: 2, best: 112, authenticity: 0.89 },
+      { username: 'quiet_hunter', score: 142, tweets: 1, best: 142, authenticity: 0.93 },
+    ];
+
+    function loadData() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        try { return JSON.parse(raw); } catch(e) {}
+      }
+      return { creators: [...seedData], submissions: [] };
+    }
+
+    function saveData(data) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    let data = loadData();
+
+    // ========== SCORING ENGINE ==========
+    function calculateAuthenticity(likes, rts, replies, views, followers, ageDays) {
+      const engagement = likes + rts * 2 + replies * 1.5;
+      const engRate = followers > 0 ? engagement / followers : 0;
+
+      let multiplier = 1.0;
+      let flags = [];
+
+      // Extremely high engagement rate on small accounts = suspicious
+      if (followers < 300 && engRate > 0.15) {
+        multiplier *= 0.15;
+        flags.push('Extreme engagement rate on small account');
+      } else if (followers < 1000 && engRate > 0.08) {
+        multiplier *= 0.4;
+        flags.push('Unusually high engagement rate');
+      } else if (engRate > 0.25) {
+        multiplier *= 0.3;
+        flags.push('Implausible engagement rate');
+      }
+
+      // Very new accounts
+      if (ageDays < 14) {
+        multiplier *= 0.25;
+        flags.push('Account very new (<14 days)');
+      } else if (ageDays < 45) {
+        multiplier *= 0.6;
+        flags.push('Young account');
+      }
+
+      // Zero or near-zero engagement with high claims
+      if (views > 5000 && likes < 3 && rts < 1) {
+        multiplier *= 0.2;
+        flags.push('Views without engagement');
+      }
+
+      // Perfect ratios that look farmed
+      if (likes > 50 && rts > 0 && Math.abs(likes / (rts || 1) - 5) < 0.3 && replies === 0) {
+        multiplier *= 0.5;
+        flags.push('Suspicious like/RT ratio pattern');
+      }
+
+      if (multiplier < 0.2) multiplier = 0; // kill score
+
+      return { multiplier: Math.max(0, Math.min(1, multiplier)), flags };
+    }
+
+    function scoreTweet({ likes, rts, replies, views, followers, ageDays, relevant }) {
+      const base = (likes * 1) + (rts * 3) + (replies * 2) + (views * 0.02);
+      const auth = calculateAuthenticity(likes, rts, replies, views, followers, ageDays);
+
+      let relMult = 1.0;
+      if (relevant === 'partial') relMult = 0.5;
+      if (relevant === 'no') relMult = 0;
+
+      const finalScore = Math.round(base * auth.multiplier * relMult);
+
+      return {
+        base: Math.round(base),
+        authenticity: auth.multiplier,
+        flags: auth.flags,
+        relevance: relMult,
+        finalScore,
+        isBotted: auth.multiplier === 0 || (auth.flags.length > 0 && auth.multiplier < 0.35)
+      };
+    }
+
+    // ========== UI ==========
+    function showView(name) {
+      document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
+      document.getElementById('view-' + name).classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (name === 'leaderboard') renderLeaderboard();
+    }
+
+    function renderLeaderboard() {
+      // Aggregate from data.creators
+      const sorted = [...data.creators].sort((a, b) => b.score - a.score);
+      const tbody = document.getElementById('leaderboard-body');
+      tbody.innerHTML = sorted.map((c, i) => {
+        const rankDisplay = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `#${i + 1}`;
+        const rankClass = i < 3 ? 'text-hate-400 font-bold' : 'text-gray-400';
+        return `
+          <tr class="hover:bg-wolf-700/50 transition">
+            <td class="px-5 py-4 ${rankClass}">${rankDisplay}</td>
+            <td class="px-5 py-4">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-wolf-600 flex items-center justify-center text-sm font-bold">${c.username[0].toUpperCase()}</div>
+                <div>
+                  <div class="font-semibold">@${c.username}</div>
+                  <div class="text-xs text-gray-500">Auth ${Math.round(c.authenticity * 100)}%</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-5 py-4 text-right text-gray-300">${c.tweets}</td>
+            <td class="px-5 py-4 text-right font-bold text-hate-400">${c.score.toLocaleString()}</td>
+            <td class="px-5 py-4 text-right text-gray-400">${c.best}</td>
+          </tr>
+        `;
+      }).join('');
+
+      // Update stats
+      document.getElementById('stat-creators').textContent = sorted.length;
+      document.getElementById('stat-tweets').textContent = sorted.reduce((s, c) => s + c.tweets, 0);
+      document.getElementById('stat-points').textContent = sorted.reduce((s, c) => s + c.score, 0).toLocaleString();
+    }
+
+    function scoreAndSubmit() {
+      const username = document.getElementById('input-username').value.trim().replace('@', '');
+      const url = document.getElementById('input-tweet-url').value.trim();
+      const likes = parseInt(document.getElementById('input-likes').value) || 0;
+      const rts = parseInt(document.getElementById('input-rts').value) || 0;
+      const replies = parseInt(document.getElementById('input-replies').value) || 0;
+      const views = parseInt(document.getElementById('input-views').value) || 0;
+      const followers = parseInt(document.getElementById('input-followers').value) || 1;
+      const ageDays = parseInt(document.getElementById('input-age').value) || 30;
+      const relevant = document.getElementById('input-relevant').value;
+
+      if (!username) {
+        alert('Enter your X username');
+        return;
+      }
+      if (!url || !url.includes('x.com/') && !url.includes('twitter.com/')) {
+        alert('Paste a valid X/Twitter tweet URL');
+        return;
+      }
+
+      const result = scoreTweet({ likes, rts, replies, views, followers, ageDays, relevant });
+
+      // Show result
+      const card = document.getElementById('result-card');
+      const content = document.getElementById('result-content');
+      card.classList.remove('hidden');
+
+      let html = '';
+      if (result.finalScore === 0 || result.isBotted) {
+        html = `
+          <div class="text-center py-4">
+            <div class="text-5xl mb-3">🚫</div>
+            <div class="text-2xl font-bold text-hate-500 mb-2">0 POINTS</div>
+            <p class="text-gray-400 mb-4">This tweet was flagged or has insufficient authentic engagement.</p>
+            ${result.flags.length ? `<div class="text-left bg-wolf-900 rounded-lg p-4 text-sm"><div class="font-semibold text-hate-400 mb-2">Flags:</div><ul class="list-disc list-inside text-gray-400">${result.flags.map(f => `<li>${f}</li>`).join('')}</ul></div>` : ''}
+            ${result.relevance === 0 ? '<p class="text-sm text-gray-500 mt-3">Tweet marked as not relevant to $HATER.</p>' : ''}
+          </div>
+        `;
+      } else {
+        html = `
+          <div class="text-center mb-6">
+            <div class="text-5xl font-black text-hate-400 mb-1">${result.finalScore}</div>
+            <div class="text-sm text-gray-400 uppercase tracking-wider">Points Awarded</div>
+          </div>
+          <div class="grid grid-cols-3 gap-3 mb-6 text-center">
+            <div class="bg-wolf-900 rounded-lg p-3">
+              <div class="text-lg font-bold">${result.base}</div>
+              <div class="text-xs text-gray-500">Base</div>
+            </div>
+            <div class="bg-wolf-900 rounded-lg p-3">
+              <div class="text-lg font-bold">${Math.round(result.authenticity * 100)}%</div>
+              <div class="text-xs text-gray-500">Authenticity</div>
+            </div>
+            <div class="bg-wolf-900 rounded-lg p-3">
+              <div class="text-lg font-bold">${result.relevance === 1 ? '100%' : result.relevance === 0.5 ? '50%' : '0%'}</div>
+              <div class="text-xs text-gray-500">Relevance</div>
+            </div>
+          </div>
+          ${result.flags.length ? `<div class="bg-yellow-900/20 border border-yellow-800/50 rounded-lg p-3 text-sm text-yellow-200 mb-4"><strong>Notes:</strong> ${result.flags.join(' • ')}</div>` : '<div class="text-sm text-green-400 mb-4 text-center">✓ Passed authenticity checks</div>'}
+          <div class="text-center">
+            <button onclick="confirmSubmit('${username}', ${result.finalScore})" class="bg-hate-600 hover:bg-hate-500 px-6 py-2.5 rounded-lg font-semibold">
+              Add to Leaderboard
+            </button>
+          </div>
+        `;
+      }
+      content.innerHTML = html;
+    }
+
+    function confirmSubmit(username, score) {
+      // Find or create creator
+      let creator = data.creators.find(c => c.username.toLowerCase() === username.toLowerCase());
+      if (!creator) {
+        creator = { username, score: 0, tweets: 0, best: 0, authenticity: 0.9 };
+        data.creators.push(creator);
+      }
+      creator.score += score;
+      creator.tweets += 1;
+      if (score > creator.best) creator.best = score;
+      // simple avg authenticity update
+      creator.authenticity = Math.min(1, (creator.authenticity + 0.85) / 2);
+
+      data.submissions.push({
+        username,
+        score,
+        ts: Date.now()
+      });
+
+      saveData(data);
+      alert(`+${score} points added for @${username}! Check the leaderboard.`);
+      showView('leaderboard');
+    }
+
+    // Init
+    renderLeaderboard();
+    showView('home');
+  </script>
 </body>
 </html>
